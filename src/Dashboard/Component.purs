@@ -23,10 +23,11 @@ data Query a = FetchProjects a
 type Config =
   { baseUrl :: Gitlab.BaseUrl
   , token   :: Gitlab.Token
+  , groupId :: Gitlab.GroupId
   }
 
 ui :: Config -> H.Component HH.HTML Query Unit Void Aff
-ui { baseUrl, token } =
+ui { baseUrl, token, groupId } =
   H.component
     { initialState: const initialState
     , render
@@ -68,7 +69,7 @@ ui { baseUrl, token } =
   getProjects :: Aff Gitlab.Projects
   getProjects = do
     log "Fetching list of projects..."
-    Gitlab.getProjects baseUrl token
+    Gitlab.getProjects baseUrl token groupId
 
   getJobs :: Gitlab.Project -> Aff Gitlab.Jobs
   getJobs project@{ id: Gitlab.ProjectId pid } = do

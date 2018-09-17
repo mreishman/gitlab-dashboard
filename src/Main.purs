@@ -28,7 +28,8 @@ main :: Effect Unit
 main = do
   token   <- Gitlab.Token   <$> URLParams.get "private_token"
   baseUrl <- Gitlab.BaseUrl <$> URLParams.get "gitlab_url"
-  let config = { baseUrl, token }
+  groupId <- Gitlab.GroupId <$> URLParams.get "group_id"
+  let config = { baseUrl, token, groupId }
   -- TODO: display error if parameters are not provided
   HA.runHalogenAff $ do
     body <- HA.awaitBody

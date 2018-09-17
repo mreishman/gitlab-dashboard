@@ -20,6 +20,7 @@ import Simple.JSON (class ReadForeign, class WriteForeign, readJSON)
 
 newtype BaseUrl = BaseUrl String
 newtype Token = Token String
+newtype GroupId = GroupId String
 
 data PipelineStatus
   = Running
@@ -144,10 +145,12 @@ type Projects = Array Project
 type Jobs = Array Job
 
 
-getProjects :: BaseUrl -> Token -> Aff Projects
-getProjects (BaseUrl baseUrl) (Token token) = do
+getProjects :: BaseUrl -> Token -> GroupId -> Aff Projects
+getProjects (BaseUrl baseUrl) (Token token) (GroupId groupId) = do
   let url = baseUrl
-            <> "/api/v4/projects?private_token="
+            <> "/api/v4"
+            <> (if (groupId /= "null") then "/groups/" <> groupId else "")
+            <> "/projects?private_token="
             <> token
             <> "&simple=true&per_page=20&order_by=last_activity_at"
   projectsRes <- get json url

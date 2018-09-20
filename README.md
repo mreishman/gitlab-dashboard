@@ -28,8 +28,16 @@ for Issues tagged with "Good first issue"!
 [Github-pages hosted version](https://ksf-media.github.io/gitlab-dashboard/)
 
 You need to give to the page some parameters:
+
+### Required
 - `private_token`: your Gitlab auth token
 - `gitlab_url`: the URL to your Gitlab instance
+
+### Optional
+
+- `group_id`: Gitlab group id to filter by
+OR
+- `user_id`: Gitlab user id to filter by
 
 Example: `https://ksf-media.github.io/gitlab-dashboard/index.html?private_token=YOUR-TOKEN-HERE&gitlab_url=https://YOUR-GITLAB-URL`
 
@@ -46,6 +54,6 @@ Quickstart:
 ## Docker
 
 Build image
-    docker build -t gitlab-dashboard:latest .
+    `docker build -t gitlab-dashboard:latest .`
 Run the server
-    docker run -t -p 80:80 --rm gitlab-dashboard
+    `docker run -t -p 80:80 --rm gitlab-dashboard`

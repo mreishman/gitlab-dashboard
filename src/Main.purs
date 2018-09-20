@@ -29,7 +29,8 @@ main = do
   token   <- Gitlab.Token   <$> URLParams.get "private_token"
   baseUrl <- Gitlab.BaseUrl <$> URLParams.get "gitlab_url"
   groupId <- Gitlab.GroupId <$> URLParams.get "group_id"
-  let config = { baseUrl, token, groupId }
+  userId  <- Gitlab.UserId  <$> URLParams.get "user_id"
+  let config = { baseUrl, token, groupId, userId }
   -- TODO: display error if parameters are not provided
   HA.runHalogenAff $ do
     body <- HA.awaitBody

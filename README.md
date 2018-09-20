@@ -36,6 +36,8 @@ You need to give to the page some parameters:
 ### Optional
 
 - `group_id`: Gitlab group id to filter by
+OR
+- `user_id`: Gitlab user id to filter by
 
 Example: `https://ksf-media.github.io/gitlab-dashboard/index.html?private_token=YOUR-TOKEN-HERE&gitlab_url=https://YOUR-GITLAB-URL`
 
